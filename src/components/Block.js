@@ -9,10 +9,12 @@ function Block() {
     const [nonce, setNonce] = useState(0);
     const [data, setData] = useState('');
     const [sha256, setSha256] = useState();
-    const [isValid, setIsValid] = useState ('false');
+    const [isValid, setIsValid] = useState (false);
     useEffect(() => {
         const hashedData = hashBlock({blockNumber, nonce, data});
-        if (hashedData.substring(0, DIFFICULTY) === '0'.repeat(DIFFICULTY);
+        const checkIsValid=
+          hasdedData.substring(0, DIFFICULTY) === '0'.repeat(DIFFICULTY);
+        setIsValid(checkIsValid);
         
         setSha256 (hashedData);
     }, [blockNumber, nonce, data]);
@@ -20,7 +22,7 @@ function Block() {
     return (
         <Container maxW='80%' mt="6">
         <Heading mb='10'>SHA256 Hash</Heading>
-        <Box bg='green.100'padding='6' borderRadius='mb'>
+        <Box bg={isValid? 'green.100': 'red.100'} padding='6' borderRadius='mb'>
           <Text>Block Number:</Text>
           <Input bg='white' mb='6' value={blockNumber} onChange={(e) => {setBlockNumber(e.target.value);}} />
           <Text>nonce:</Text>
@@ -29,7 +31,7 @@ function Block() {
           <Textarea bg='white' mb='2'onChange={(e) => {setData(e.target.value);}}/>
           <Text>Hash:</Text>
           <Input bg='white' mb='6' value={sha256}/>
-          <Button colorScheme='blue'>Calculate SHA256</Button>
+          <Button colorScheme='blue'>Mine</Button>
         </Box>
     </Container>  
     );
