@@ -5,23 +5,24 @@ import { mineBlock } from '../blockchain/block';
 import { DIFFICULTY } from '../blockchain/util/constants';
 import { hashBlock} from '../blockchain/util/hash';
 
-function Block() {
+function BlockchainBlock() {
     const [blockNumber, setBlockNumber] = useState(1);
     const [nonce, setNonce] = useState(0);
     const [data, setData] = useState('');
-    const [sha256, setSha256] = useState();
+    const [previousHash, setPreviousHash] = useState();
+    const [Hash, setHash] = useState();
     const [isValid, setIsValid] = useState ('false');
     useEffect(() => {
         const hashedData = hashBlock({blockNumber, nonce, data});
         const checkIsValid =
          hashedData.substring(0, DIFFICULTY) === '0'.repeat(DIFFICULTY);
         setIsValid (checkIsValid);
-        setSha256 (hashedData);
+        setHash (hashedData);
     }, [blockNumber, nonce, data]);
     function handleMine() {
         const { hashedData, nonce } = mineBlock({blockNumber, data});
         setNonce  (nonce);
-        setSha256 (hashedData);
+        setHash (hashedData);
     }
     return (
         <Container maxW='80%' mt="6">
@@ -33,12 +34,14 @@ function Block() {
           <Input bg='white' mb='6' value={nonce} onChange={(e) => {setNonce(Number(e.target.value));}} />
           <Text>Data:</Text>
           <Textarea bg='white' mb='2'onChange={(e) => {setData(e.target.value);}}/>
+          <Text>Previous Hash:</Text>
+          <Input bg='white' mb='6' value={previousHash}/>
           <Text>Hash:</Text>
-          <Input bg='white' mb='6' value={sha256}/>
+          <Input bg='white' mb='6' value={Hash}/>
           <Button colorScheme='blue' onClick={handleMine}>Mine</Button>
         </Box>
     </Container>  
     );
 }
 
-export default Block;
+export default BlockchainBlock ;
