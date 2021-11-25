@@ -1,1 +1,1 @@
-export const DIFFICULTY = 4
+export const  DIFICULTY = 4

@@ -2,7 +2,7 @@ import { Box, Container, Heading,} from '@chakra-ui/layout';
 import {Textarea, Button, Text, Input,} from '@chakra-ui/react';
 import React, {useState, useEffect} from 'react'
 import { mineBlock } from '../blockchain/block';
-import { DIFFICULTY } from '../blockchain/util/constants';
+import {  DIFICULTY } from '../blockchain/util/constants';
 import { hashBlock} from '../blockchain/util/hash';
 
 function BlockchainBlock() {
@@ -15,7 +15,7 @@ function BlockchainBlock() {
     useEffect(() => {
         const hashedData = hashBlock({blockNumber, nonce, data});
         const checkIsValid =
-         hashedData.substring(0, DIFFICULTY) === '0'.repeat(DIFFICULTY);
+         hashedData.substring(0, DIFICULTY) === '0'.repeat(DIFICULTY);
         setIsValid (checkIsValid);
         setHash (hashedData);
     }, [blockNumber, nonce, data]);
