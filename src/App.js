@@ -2,7 +2,8 @@
 import './App.css';
 import Block from './components/Block';
 import Sha256Hash from './components/Sha256Hash';
-import Blockchain from './components/BlockchainBlock';
+import BlockchainBlock from './components/BlockchainBlock';
+import Chainblock from './components/Chainblock';
 
 
 function App() {
@@ -10,7 +11,8 @@ function App() {
   <>
    <Sha256Hash/>
    <Block />
-   <Blockchain />
+   <Chainblock />
+   <BlockchainBlock/>
   </>
   );
 }
